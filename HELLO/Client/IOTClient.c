@@ -7,6 +7,23 @@
 #define SERVER_IP "192.168.1.41"  // Change this to the server's IP address
 #define SERVER_PORT 12345      // Change this to the server's port
 
+void receive_message_from_server(int sockfd) {
+    char buffer[1024];
+    struct sockaddr_in server_addr;
+    socklen_t addr_len = sizeof(server_addr);
+
+    // Receive message from the server
+    ssize_t bytes_received = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&server_addr, &addr_len);
+    if (bytes_received == -1) {
+        perror("Error receiving message");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    buffer[bytes_received] = '\0';  // Null-terminate the received message
+    printf("Received message from server: %s\n", buffer);
+}
+
 int main() {
     int sockfd;
     struct sockaddr_in server_addr;
@@ -37,6 +54,10 @@ int main() {
     }
 
     printf("Message sent to server: %s\n", message);
+
+    //Read message from server
+
+    receive_message_from_server(sockfd);
 
     close(sockfd);
     return 0;
