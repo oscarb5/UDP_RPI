@@ -47,7 +47,9 @@ int main() {
         printf("Received from client: %s\n", buffer);
 
         // Send a reply back to the client
-        char reply[] = "Hello from UDP server!";
+        char reply[] = "Hello RPI";
+        if(strcmp("Hello Server",buffer)!=0){
+        	 strcpy(reply, "Wrong Message");}	
         sendto(sockfd, reply, strlen(reply), 0, (struct sockaddr*)&client_addr, client_len);
     }
 

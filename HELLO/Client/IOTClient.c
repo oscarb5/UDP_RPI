@@ -7,7 +7,7 @@
 #define SERVER_IP "192.168.1.41"  // Change this to the server's IP address
 #define SERVER_PORT 12345      // Change this to the server's port
 
-void receive_message_from_server(int sockfd) {
+void receive_message_from_server(int sockfd) { //Reads message sent by server
     char buffer[1024];
     struct sockaddr_in server_addr;
     socklen_t addr_len = sizeof(server_addr);
@@ -27,7 +27,7 @@ void receive_message_from_server(int sockfd) {
 int main() {
     int sockfd;
     struct sockaddr_in server_addr;
-    char message[] = "Hello, server!";  // Message to send
+    char message[] = "Hello Server!";  // Message to send
 
     // Create a socket
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
