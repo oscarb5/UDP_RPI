@@ -27,7 +27,7 @@ void receive_message_from_server(int sockfd) { //Reads message sent by server
 int main() {
     int sockfd;
     struct sockaddr_in server_addr;
-    char message[] = "Hello Server!";  // Message to send
+    char message[] = "Hello Server";  // Message to send
 
     // Create a socket
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);

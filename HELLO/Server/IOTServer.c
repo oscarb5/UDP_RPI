@@ -33,14 +33,10 @@ int main() {
 
     printf("UDP server listening on port %d...\n", PORT);
 
-    while (1) {
+
         // Receive data from client
         int bytes_received = recvfrom(sockfd, buffer, sizeof(buffer), 0,
                                      (struct sockaddr*)&client_addr, &client_len);
-        if (bytes_received < 0) {
-            perror("Error receiving data");
-            continue;
-        }
 
         // Print received data
         buffer[bytes_received] = '\0';
@@ -51,8 +47,7 @@ int main() {
         if(strcmp("Hello Server",buffer)!=0){
         	 strcpy(reply, "Wrong Message");}	
         sendto(sockfd, reply, strlen(reply), 0, (struct sockaddr*)&client_addr, client_len);
-    }
-
+    
     close(sockfd);
     return 0;
 }
